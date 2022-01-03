@@ -1,0 +1,8 @@
+.alert{
+  position: absolute;
+
+  &__wrapper{
+    display: grid;
+    justify-items: center;
+  }
+}

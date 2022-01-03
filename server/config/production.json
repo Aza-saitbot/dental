@@ -1,0 +1,6 @@
+{
+  "port": 5000,
+  "jwtSecret": "Azamat Saitbot secret",
+  "mongoUri": "mongodb+srv://saitbot:santa123@cluster0.02xbs.mongodb.net/app?retryWrites=true&w=majority",
+  "baseUrl": "http://localhost:5000"
+}

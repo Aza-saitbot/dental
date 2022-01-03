@@ -1,0 +1,174 @@
+.main{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "tb bb"
+      "mn mn"
+      "ft ft";
+
+
+    &__header{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        &__logo{
+            display: grid;
+            grid-template-columns: 55px 1fr;
+            justify-items: start;
+            align-items: center;
+
+
+            p{
+                color: white;
+            }
+
+
+            &__item {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 40px;
+                    height: 40px;
+                    object-fit: cover;
+                }
+            }
+        }
+        &__menu{
+            display: grid;
+            align-items: center;
+            justify-items: end;
+
+            &__item{
+                border: 1px solid gray;
+                display: grid;
+                grid-template-columns: 1fr 0.5fr;
+                align-items: center;
+                justify-content: center;
+                width: 77px;
+                height: 42px;
+                background-color: white;
+                border-radius: 21px;
+                z-index: 1;
+                cursor: pointer;
+
+                &__menuIcon{
+                    display: grid;
+                    justify-self: end;
+
+                }
+
+            }
+        }
+    }
+
+    &__content{
+
+
+
+        &__mainSearch{
+            display: grid;
+            align-items: center;
+            justify-items: center;
+
+            &__item{
+                display: grid;
+                grid-template-columns: repeat(5,auto);
+                column-gap: 15px;
+                padding: 5px;
+                align-items: center;
+                justify-items: center;
+                cursor: pointer;
+                background-color: #F7F7F7;
+                border-radius: 32px;
+
+                &__detail{
+                    display: grid;
+                    grid-template-rows:20px 30px;
+                    gap: 8px;
+                    padding: 8px 10px;
+                    &:hover{
+                        border-radius: 30px;
+                        background-color: #EBEBEB;
+                        padding: 8px 10px;
+
+                    }
+
+                    &__title{
+                        display: grid;
+                        align-items: end;
+                        justify-items: start;
+
+                       h3{
+                           font-family: "Roboto",sans-serif;
+                           font-size: 12px ;
+                           line-height: 16px ;
+                           font-weight: 800 ;
+                           letter-spacing: 0.04em ;
+                       }
+
+                    }
+                    &__name{
+                        display: grid;
+                        align-self: center;
+                        justify-items: start;
+                        p{
+                            font-family: inherit;
+                            font-size: 14px;
+                            line-height: 18px;
+                            font-weight: 600;
+                            color: gray;
+                        }
+
+
+                    }
+                }
+
+
+                &__buttonWrapper{
+                    display: grid;
+                    padding: 10px;
+                    &:hover{
+
+                        padding: 10px;
+                        border-radius: 30px;
+                        background-color: #EBEBEB;
+                    }
+
+                }
+
+
+            }
+
+
+
+
+
+
+
+        }
+
+
+    }
+
+    &__typeBar{
+        display: grid;
+        grid-area: tb;
+
+    }
+    &__brandBar{
+        display: grid;
+        grid-area: bb;
+    }
+    &__main{
+        display: grid;
+        grid-area: mn;
+    }
+    &__footer{
+        display: grid;
+        grid-area: ft;
+    }
+}
