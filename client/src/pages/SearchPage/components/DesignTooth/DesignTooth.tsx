@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Controller, useFormContext} from 'react-hook-form';
 import '../../SearchPage.scss'
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
@@ -23,6 +23,7 @@ import DesignDesignShoulder3 from '../../../../assets/designShoulder3.png'
 import ColorTeeth from '../../../../assets/colotTeeth.png'
 
 import {useStylesIntegration} from "../../utility/utility";
+import {SelectChangeEvent} from "@mui/material/Select";
 
 const arrayIntermediatePart=[
     {id:1,img:DesignTooth1},
@@ -54,6 +55,11 @@ const arrayColorRestorations=[
 const DesignTooth = () => {
     const {control,register} = useFormContext();
     const classes=useStylesIntegration()
+    const [intermediatePart,setIntermediatePart]=useState<number>(0)
+    const [designCarcass,setDesignCarcass]=useState<number>(0)
+    const [shoulder,setShoulder]=useState<number>(0)
+    const [colorRestorations,setColorRestorations]=useState<number>(0)
+
         return (
             <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design">
                 <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__list">
@@ -61,7 +67,7 @@ const DesignTooth = () => {
                         <Controller
                             name="intermediatePart"
                             control={control}
-                            render={({field:{value,onChange}})=>
+                            render={({field:{onChange}})=>
                                 <FormControl style={{width:'200px'}}>
                                     <InputLabel id="intermediatePart-label">Дизайн промежуточной части</InputLabel>
                                     <Select
@@ -70,15 +76,17 @@ const DesignTooth = () => {
                                         IconComponent={ShowIcon}
                                         MenuProps={{ classes: { list: classes.list } }}
                                         classes={{select:classes.select,root:classes.root}}
-                                        value={value}
-                                        onChange={onChange}
+                                        value={intermediatePart}
+                                        onChange={(e:SelectChangeEvent<number>)=> {
+                                            onChange(e)
+                                            setIntermediatePart(Number(e.target.value))
+                                        }}
                                     >
                                         {arrayIntermediatePart?.map(({id,img}) => (
                                             <MenuItem key={id}
-
                                                       value={id}>
                                                <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__list__item__menu">
-                                                   <img src={img}/>
+                                                   <img src={img} alt="img"/>
                                                </div>
                                             </MenuItem>
                                         ))}
@@ -91,24 +99,28 @@ const DesignTooth = () => {
                         <Controller
                             name="designCarcass"
                             control={control}
-                            render={({field:{value,onChange}})=>
+                            render={({field:{onChange}})=>
                                 <FormControl style={{width:'200px'}}>
                                     <InputLabel id="carcass-label">Каркас</InputLabel>
                                     <Select
                                         labelId="carcass-label"
                                         label="Каркас"
+                                        defaultValue={0}
                                         IconComponent={ShowIcon}
                                         MenuProps={{ classes: { list: classes.list } }}
                                         classes={{select:classes.select,root:classes.root}}
-                                        value={value}
-                                        onChange={onChange}
+                                        value={designCarcass}
+                                        onChange={(e:SelectChangeEvent<number>)=>{
+                                            onChange(e)
+                                            setDesignCarcass(Number(e.target.value))
+                                        }}
                                     >
                                         {arrayDesignCarcass?.map(({id,img}) => (
                                             <MenuItem key={id}
 
                                                       value={id}>
                                                 <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__list__item__menu">
-                                                    <img src={img}/>
+                                                    <img src={img} alt="img"/>
                                                 </div>
                                             </MenuItem>
                                         ))}
@@ -121,7 +133,7 @@ const DesignTooth = () => {
                         <Controller
                             name="shoulder"
                             control={control}
-                            render={({field:{value,onChange}})=>
+                            render={({field:{onChange}})=>
                                 <FormControl style={{width:'200px'}}>
                                     <InputLabel id="shoulder-label">Плечо</InputLabel>
                                     <Select
@@ -130,14 +142,17 @@ const DesignTooth = () => {
                                         IconComponent={ShowIcon}
                                         MenuProps={{ classes: { list: classes.list } }}
                                         classes={{select:classes.select,root:classes.root}}
-                                        value={value}
-                                        onChange={onChange}
+                                        value={shoulder}
+                                        onChange={(e:SelectChangeEvent<number>)=>{
+                                            onChange(e)
+                                            setShoulder(Number(e.target.value))
+                                        }}
                                     >
                                         {arrayShoulder?.map(({id,img}) => (
                                             <MenuItem key={id}
                                                       value={id}>
                                                 <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__list__item__menu">
-                                                    <img src={img}/>
+                                                    <img src={img} alt="img"/>
                                                 </div>
                                             </MenuItem>
                                         ))}
@@ -150,7 +165,7 @@ const DesignTooth = () => {
                         <Controller
                             name="colorRestorations"
                             control={control}
-                            render={({field:{value,onChange}})=>
+                            render={({field:{onChange}})=>
                                 <FormControl style={{width:'200px'}}>
                                     <InputLabel id="colorRestorations-label">Окрасить реставрации</InputLabel>
                                     <Select
@@ -159,8 +174,11 @@ const DesignTooth = () => {
                                         IconComponent={ShowIcon}
                                         MenuProps={{ classes: { list: classes.list } }}
                                         classes={{select:classes.select,root:classes.root}}
-                                        value={value}
-                                        onChange={onChange}
+                                        value={colorRestorations}
+                                        onChange={(e:SelectChangeEvent<number>)=> {
+                                            onChange(e)
+                                            setColorRestorations(Number(e.target.value))
+                                        }}
                                     >
                                         {arrayColorRestorations?.map(({id,value}) => (
                                             <MenuItem key={id}
@@ -183,7 +201,7 @@ const DesignTooth = () => {
                             {...register('colorTeeth')} type="text"/>
                     </div>
                     <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__colorTeeth__teeth">
-                        <img src={ColorTeeth}/>
+                        <img src={ColorTeeth} alt="img"/>
                     </div>
                 </div>
             </div>

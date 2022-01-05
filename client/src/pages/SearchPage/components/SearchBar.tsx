@@ -1,7 +1,6 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {Component, useState} from 'react';
 import '../SearchPage.scss'
 import MainBackground from '../../../assets/protez.jpg'
-import SearchMain from "./SearchMain";
 import {FormProvider, useForm} from "react-hook-form";
 import TechnicalTask from "./TechnicalTask/TechnicalTask";
 import SearchIcon from "@mui/icons-material/Search";
@@ -9,7 +8,7 @@ import {useStylesSearch} from "../../../useStyles/useStyles";
 import Carcass from "./Carcass/Carcass";
 import DesignTooth from "./DesignTooth/DesignTooth";
 import DataPackerDental from './DatePacker/DataPackerDental';
-
+import {SearchSchemaType} from "../../../types/RequestOptionsType";
 
 const tabsSearch = [
     {id: 1, title: 'Техническое задание', Component: TechnicalTask},
@@ -39,7 +38,7 @@ const SearchBar = () => {
     });
 
 
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: SearchSchemaType) => {
         console.log('data', data)
     }
 
@@ -51,6 +50,15 @@ const SearchBar = () => {
     function dragLeaveHandler(e: React.DragEvent<HTMLDivElement>) {
         e.preventDefault()
         setDrag(false)
+    }
+
+    const styleFile={
+        opacity: 0,
+        Position: "absolute",
+        width: "100%",
+        height: "100%",
+        bottom: 25,
+        zIndex: 2
     }
 
 
@@ -68,13 +76,13 @@ const SearchBar = () => {
             console.log('files', formData.getAll('files[]'))
         }
         setDrag(false)
-
     }
+
 
     return (
         <div className="searchPage__content">
             <div className="searchPage__content__item">
-                <img src={MainBackground}/>
+                <img src={MainBackground} alt="background"/>
                 <div className="searchPage__content__item__search">
                     <FormProvider {...methods}>
                         <form onSubmit={methods.handleSubmit(onSubmit)}>
@@ -103,7 +111,8 @@ const SearchBar = () => {
                             {visible && tabsSearch.map(({Component, id}) => {
                                     if (id === selectTab) {
                                         return (
-                                                <Component key={id} />
+                                                <Component key={id}
+                                                />
                                         )
                                     }
                                     return null
@@ -124,17 +133,10 @@ const SearchBar = () => {
                                         onDragOver={e => dragStartHandler(e)}
                                         className="searchPage__content__item__search__dropzone__move">
                                         <div style={{position: "relative"}}>
-                                            <input type="file" style={{
-                                                opacity: 0,
-                                                position: "absolute",
-                                                width: "100%",
-                                                height: "100%",
-                                                bottom: '25px',
-                                                zIndex: 2
-                                            }}/>
+                                            <input type="file"
+                                                   style={styleFile}/>
                                             <p>Перетащите файлы, чтобы загрузить их</p></div>
                                     </div>
-
                                 }
                             </div>
 

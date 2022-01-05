@@ -36,8 +36,6 @@ const history=useHistory()
         mode: "onSubmit",
     })
 
-    console.log('isAuth',isAuth)
-
     const onSubmit: SubmitHandler<ISignInForm> = (data) => {
         if (isLogin) {
             dispatch(fetchLogin(data))

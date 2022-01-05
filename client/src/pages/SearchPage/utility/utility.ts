@@ -69,29 +69,31 @@ export const arrayTeeth=[
     {id:48,value:false,src:tooth48},
 ]
 
-export const arrayCarcass=[
-    {id:1, title:'Е-Max с нанесением керамики',value:false},
-    {id:2, title:'Е-Max окрашивание полная анатомия',value:false},
-    {id:3, title:'ZrO2 с нанесением керамики',value:false},
-    {id:4, title:'ZrO2 с окрашивание полная анатомия',value:false},
-    {id:5, title:'CoCr CAD/CAM Sintron',value:false},
-    {id:6, title:'MK',value:false},
-    {id:7, title:'Коронка(промежуточная)',value:false},
-    {id:8, title:'Коронка на имплантате',value:false},
-    {id:9, title:'Инлей / Онлей',value:false},
-    {id:10, title:'Wax Up CAD/CAM',value:false},
-    {id:11, title:'Max Up',value:false},
-    {id:12, title:'Индивидуальная слепочная ложка',value:false},
-    {id:13, title:'Съемный протез',value:false},
-    {id:14, title:'Бюгельный протез',value:false},
-    {id:15, title:'Диагностическая модель',value:false},
-    {id:16, title:'3D модель (стереолитографическая)',value:false},
-    {id:17, title:'AII on 4',value:false},
-    {id:18, title:'AII on 6)',value:false},
-    {id:19, title:'Мамелоны)',value:false},
-    {id:20, title:'Разрывы эмали',value:false},
-    {id:21, title:'Втор. дентин',value:false},
-    {id:22, title:'Окраш. фиссуры',value:false},
+type ArrayCarcassType= {id: number, title: string, name: string, value: boolean}
+
+export const arrayCarcass:Array<ArrayCarcassType>=[
+    {id:1, title:'Е-Max с нанесением керамики', name:'eMaxWithCeramic', value:false},
+    {id:2, title:'Е-Max окрашивание полная анатомия', name:'eMaxStainingAnatomy', value:false},
+    {id:3, title:'ZrO2 с нанесением керамики', name:'zr02WithCeramic', value:false},
+    {id:4, title:'ZrO2 с окрашивание полная анатомия',name:'zr02WithStatingAnatomy',value:false},
+    {id:5, title:'CoCr CAD/CAM Sintron', name:'coCrCadCam', value:false},
+    {id:6, title:'MK', name:'MK', value:false},
+    {id:7, title:'Коронка(промежуточная)', name:'crownIntermediate', value:false},
+    {id:8, title:'Коронка на имплантате', name:'implantCrown', value:false},
+    {id:9, title:'Инлей / Онлей', name:'inlayOnlay', value:false},
+    {id:10, title:'Wax Up CAD/CAM', name:'waxUpCadCam', value:false},
+    {id:11, title:'Max Up', name:'maxUp', value:false},
+    {id:12, title:'Индивидуальная слепочная ложка', name:'individualImpressionTray', value:false},
+    {id:13, title:'Съемный протез', name:'removableDenture', value:false},
+    {id:14, title:'Бюгельный протез', name:'claspProsthesis', value:false},
+    {id:15, title:'Диагностическая модель', name:'diagnosticModel', value:false},
+    {id:16, title:'3D модель (стереолитографическая)', name:'3dModel', value:false},
+    {id:17, title:'AII on 4', name:'allOn4', value:false},
+    {id:18, title:'AII on 6)', name:'allOn6', value:false},
+    {id:19, title:'Мамелоны)',name:'mamelons',value:false},
+    {id:20, title:'Разрывы эмали', name:'enamelTears', value:false},
+    {id:21, title:'Вторичный дентин', name:'secondaryDentin', value:false},
+    {id:22, title:'Окрашенные фиссуры', name:'paintedFissures', value:false},
 ]
 
 export const useStylesIntegration = makeStyles({
@@ -102,21 +104,21 @@ export const useStylesIntegration = makeStyles({
         fontSize: 18,
         height: 65,
         color: '#333333',
-
-        '&.MuiOutlinedInput-root': {
-            fontFamily: 'Inter',
-            fontStyle: 'normal',
-            fonWeight: 'normal',
-            fontSize: 18,
-            borderRadius: 6,
-            background: '#F4F9FF',
-            boxShadow: 'inset 0px 1px 2px rgba(0, 0, 0, 0.2)',
-            color: '#333333',
-        },
-
-        '& .MuiOutlinedInput-notchedOutline': {
-            // border: 'none !important',
-        },
+        //
+        // '&.MuiOutlinedInput-root': {
+        //     fontFamily: 'Inter',
+        //     fontStyle: 'normal',
+        //     fonWeight: 'normal',
+        //     fontSize: 18,
+        //     // borderRadius: 6,
+        //     // background: '#F4F9FF',
+        //     boxShadow: 'inset 0px 1px 2px rgba(0, 0, 0, 0.2)',
+        //     color: '#333333',
+        // },
+        //
+        // '& .MuiOutlinedInput-notchedOutline': {
+        //     // border: 'none !important',
+        // },
     },
     list: {
         // background: '#F4F9FF',
@@ -124,37 +126,37 @@ export const useStylesIntegration = makeStyles({
     select: {
         background: 'white',
         width:'100%',
-
-        '&.MuiSelect-select.MuiInputBase-input.MuiOutlinedInput-input.MuiSelect-select': {
-            width:'100%',
-
-        },
-
-        '&.MuiSelect-outlined': {
-            // background: '#F4F9FF',
-            // margin: 2,
-        },
-
-        // background: '#F4F9FF',
-        '&.MuiPaper-root': {
-            background: '#F4F9FF',
-        },
-
-        '&.MuiMenuItem-root:hover': {
-            // background: '#ffe1cc5e',
-            borderRadius: 6,
-            // margin: '0 5px 0 5px',
-        },
-        '&.Mui-selected': {
-            // background: '#FFE1CC !important',
-            borderRadius: 6,
-            // margin: '0 5px 0 5px',
-
-            '&.Mui-selected:hover': {
-                backgroundColor: '#FFE1CC',
-                // margin: '0 5px 0 5px',
-            },
-        },
+        //
+        // '&.MuiSelect-select.MuiInputBase-input.MuiOutlinedInput-input.MuiSelect-select': {
+        //     width:'100%',
+        //
+        // },
+        //
+        // '&.MuiSelect-outlined': {
+        //     // background: '#F4F9FF',
+        //     // margin: 2,
+        // },
+        //
+        // // background: '#F4F9FF',
+        // '&.MuiPaper-root': {
+        //     background: '#F4F9FF',
+        // },
+        //
+        // '&.MuiMenuItem-root:hover': {
+        //     // background: '#ffe1cc5e',
+        //     borderRadius: 6,
+        //     // margin: '0 5px 0 5px',
+        // },
+        // '&.Mui-selected': {
+        //     // background: '#FFE1CC !important',
+        //     borderRadius: 6,
+        //     // margin: '0 5px 0 5px',
+        //
+        //     '&.Mui-selected:hover': {
+        //         backgroundColor: '#FFE1CC',
+        //         // margin: '0 5px 0 5px',
+        //     },
+        // },
     },
     iconStyle: {
         position: 'absolute',

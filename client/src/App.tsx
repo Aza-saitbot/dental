@@ -9,6 +9,8 @@ import {useAppSelector} from "./store/store";
 import {useDispatch} from "react-redux";
 import {CircularProgress} from "@mui/material";
 import Box from "@mui/material/Box";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import {LocalizationProvider} from "@mui/lab";
 
 interface Props {
     window?: () => Window;
@@ -34,10 +36,13 @@ function App(props: Props) {
 
     return (
         <React.Fragment>
-            <AlertBasic/>
-            <Navbar {...props} />
-            <Toolbar/>
-            <AppRouter/>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <AlertBasic/>
+                <Navbar {...props} />
+                <Toolbar/>
+                <AppRouter/>
+            </LocalizationProvider>
+
         </React.Fragment>
     );
 }

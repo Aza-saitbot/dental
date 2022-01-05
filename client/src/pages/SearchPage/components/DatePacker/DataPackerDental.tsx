@@ -1,35 +1,21 @@
 import * as React from 'react';
-import TextField from '@mui/material/TextField';
-import DateRangePicker, { DateRange } from '@mui/lab/DateRangePicker';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import Box from '@mui/material/Box';
+import {FC} from 'react';
+import {DateRange} from '@mui/lab/DateRangePicker';
 import '../../SearchPage.scss'
+import {DatePickerAsController} from "../../../../utils/DatePickerAsController";
+import {useFormContext} from "react-hook-form";
 
-const DataPackerDental = () => {
-    const [value, setValue] = React.useState<DateRange<Date>>([null, null]);
-    
-    console.log('value',value)
-    
+type DataPackerType={}
+
+const DataPackerDental:FC<DataPackerType> = () => {
+      const [value, onChange] = React.useState<DateRange<Date>>([null, null]);
+    const {control} = useFormContext();
+
+    const date=DatePickerAsController({value,onChange,control,name:'datePicker'})
+
     return (
         <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__datePacket">
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <DateRangePicker
-                    startText="Когда начать"
-                    endText="Когда закончить"
-                    value={value}
-                    onChange={(newValue) => {
-                        setValue(newValue);
-                    }}
-                    renderInput={(startProps, endProps) => (
-                        <React.Fragment>
-                           <span style={{marginRight:10}}>c</span> <TextField {...startProps} />
-                            <Box sx={{ mx: 2 }}> по </Box>
-                            <TextField {...endProps} />
-                        </React.Fragment>
-                    )}
-                />
-            </LocalizationProvider>
+                {date}
         </div>
     );
 };
