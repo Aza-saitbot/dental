@@ -1,13 +1,11 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import userReducer from './reducers/UserSlice'
-import deviceReducer from './reducers/DeviceSlice'
+import jobReducer from './reducers/JobSlice'
 import {TypedUseSelectorHook, useSelector} from "react-redux";
 
 const rootReducer = combineReducers({
-
-user: userReducer,
-    device:deviceReducer
-
+    user: userReducer,
+    job: jobReducer
 })
 
 export const setupStore = () => {

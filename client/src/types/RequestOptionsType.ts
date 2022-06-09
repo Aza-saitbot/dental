@@ -15,4 +15,5 @@ export interface SearchSchemaType {
     teeth: Array<{[key: number]: boolean}>
     temporaryCrown?: string
     tz: string
+    img?:any
 }

@@ -1,13 +1,14 @@
 import React from 'react';
-import '../pages/ShopPage/ShopPage.scss'
+import {useDispatch} from "react-redux";
+import './Header/Header.scss'
 import MenuIcon from "@mui/icons-material/Menu";
-import {Avatar, Divider, IconButton, ListItemIcon, Menu, MenuItem} from "@mui/material";
+import {Avatar, Divider, dividerClasses, IconButton, ListItemIcon, Menu, MenuItem} from "@mui/material";
 import {Logout, PersonAdd, Settings} from "@mui/icons-material";
 import {setIsAuth, setUser} from "../store/reducers/UserSlice";
 import {useHistory} from "react-router-dom";
 import {useAppSelector} from "../store/store";
 import {ADMIN_ROUTE, LOGIN_ROUTE} from "../utils/consts";
-import {useDispatch} from "react-redux";
+
 
 
 const styleMenu={
@@ -37,6 +38,16 @@ const styleMenu={
     },
 }
 
+const menuItems=[
+    {id:1, Component: <div>Мой профиль</div> },
+    {id:2, Component: <div>
+            <ListItemIcon>
+                <Logout fontSize="small" />
+            </ListItemIcon>
+            Выйти
+        </div>},
+]
+
 const DropdownProfile = () => {
     const dispatch=useDispatch()
     const history=useHistory()
@@ -56,12 +67,10 @@ const DropdownProfile = () => {
         dispatch(setUser(null))
         dispatch(setIsAuth(false))
     }
-
-
      return (
-         <div className="main__header__menu" >
-             <div onClick={handleClick} className="main__header__menu__item">
-                 <MenuIcon className="main__header__menu__item__menuIcon"/>
+         <div>
+             <div onClick={handleClick} className="header__menu__item">
+                 <MenuIcon className="header__menu__item__menuIcon"/>
                  <IconButton onClick={handleClick} size="small">
                      <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
                  </IconButton>
@@ -76,38 +85,15 @@ const DropdownProfile = () => {
                  anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
              >
                  {isAuth ?
-                     <>
-                         <MenuItem>
-                             <Avatar /> Мой профиль
+                     menuItems.map(({Component,id})=>
+                         <MenuItem key={id} >
+                             {Component}
                          </MenuItem>
-                         <MenuItem onClick={()=>history.push(ADMIN_ROUTE)}>
-                             Админ панель
-                         </MenuItem>
-                         <Divider />
-                         <MenuItem>
-                             <ListItemIcon>
-                                 <PersonAdd fontSize="small" />
-                             </ListItemIcon>
-                             Добавить другие аккаунты
-                         </MenuItem>
-                         <MenuItem>
-                             <ListItemIcon>
-                                 <Settings fontSize="small" />
-                             </ListItemIcon>
-                             Настройки
-                         </MenuItem>
-                         <MenuItem onClick={logoutHandler}>
-                             <ListItemIcon>
-                                 <Logout fontSize="small" />
-                             </ListItemIcon>
-                             Выйти
-                         </MenuItem>
-                     </>
-                     : <>
-                         <MenuItem onClick={()=>history.push(LOGIN_ROUTE)}>
+                     )
+                     : <MenuItem onClick={()=>history.push(LOGIN_ROUTE)}>
                              Авторизация
-                         </MenuItem>
-                     </>
+                 </MenuItem>
+
                  }
              </Menu>
          </div>
@@ -116,3 +102,31 @@ const DropdownProfile = () => {
 
 
 export default DropdownProfile;
+
+// <React.Fragment>
+//     <MenuItem>
+//         <Avatar /> Мой профиль
+//     </MenuItem>
+//     <MenuItem onClick={()=>history.push(ADMIN_ROUTE)}>
+//         Админ панель
+//     </MenuItem>
+//     <Divider />
+//     <MenuItem>
+//         <ListItemIcon>
+//             <PersonAdd fontSize="small" />
+//         </ListItemIcon>
+//         Добавить другие аккаунты
+//     </MenuItem>
+//     <MenuItem>
+//         <ListItemIcon>
+//             <Settings fontSize="small" />
+//         </ListItemIcon>
+//         Настройки
+//     </MenuItem>
+//     <MenuItem onClick={logoutHandler}>
+//         <ListItemIcon>
+//             <Logout fontSize="small" />
+//         </ListItemIcon>
+//         Выйти
+//     </MenuItem>
+// </React.Fragment>

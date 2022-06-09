@@ -14,13 +14,15 @@ export const useStylesButton = makeStyles({
 });
 export const useStylesSearch = makeStyles({
     root: {
+
+    },
+    delete: {
         display:"grid",
-        gridTemplateColumns:"25px 1fr",
         alignItems:'center',
-        background: 'linear-gradient(30deg, rgba(46,100,213,1) 0%, rgba(1,237,213,1) 100%)',
+        background: 'linear-gradient(38deg, rgba(241,9,9,1) 40%, rgba(244,239,238,1) 99%)',
         border: 0,
         borderRadius: 25,
-        boxShadow: '0 3px 5px 2px rgba(46, 100, 213, .3)',
+        boxShadow: '0 3px 5px 2px rgb(241,9,9)',
         padding:10,
         color: 'white !important',
         fontFamily:'inherit',
@@ -28,6 +30,7 @@ export const useStylesSearch = makeStyles({
         fontWeight:500,
         cursor:'pointer'
     },
+
 });
 
 

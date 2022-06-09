@@ -1,16 +1,12 @@
 import React, {useEffect} from 'react';
-import './App.css';
-import {AlertBasic} from "./components/alert/Alert";
+import './App.scss'
+import {AlertBasic} from "./components/Alert/Alert";
 import AppRouter from "./components/AppRouter";
-import Navbar from './components/Navbar';
-import Toolbar from "@mui/material/Toolbar";
 import {fetchCheck} from "./api/api";
 import {useAppSelector} from "./store/store";
 import {useDispatch} from "react-redux";
 import {CircularProgress} from "@mui/material";
 import Box from "@mui/material/Box";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import {LocalizationProvider} from "@mui/lab";
 
 interface Props {
     window?: () => Window;
@@ -35,15 +31,10 @@ function App(props: Props) {
 
 
     return (
-        <React.Fragment>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <>
                 <AlertBasic/>
-                <Navbar {...props} />
-                <Toolbar/>
                 <AppRouter/>
-            </LocalizationProvider>
-
-        </React.Fragment>
+            </>
     );
 }
 

@@ -1,8 +1,13 @@
 .searchPage {
   display: grid;
   grid-template-columns: minmax(90px, 97px) 1fr minmax(90px, 97px);
-  min-height: 90vh;
-  font-family: "Roboto Light", sans-serif;
+
+
+  &.isRollUp{
+    background-color: gray;
+    opacity: 0.8;
+  }
+
 
   &__wait {
     display: grid;
@@ -108,13 +113,14 @@
 
   &__content {
     display: grid;
-    align-items: center;
-    justify-items: center;
+    background-color: yellow;
+    //align-items: center;
+    //justify-items: center;
 
     &__item {
       position: relative;
-      width: 90%;
-      height: 85%;
+      width: 80vw;
+      height: 80vh;
 
       img {
         position: absolute;
@@ -127,343 +133,16 @@
       }
 
       &__search {
-        position: absolute;
-        left:13em;
-        top:1em;
-
-        &__mainSearch {
-          display: grid;
-          align-items: center;
-          justify-items: center;
-          margin-bottom: 10px;
-
-
-          &__item {
-            display: grid;
-            grid-template-columns: repeat(5, auto);
-            column-gap: 15px;
-            padding-left: 7px;
-            align-items: center;
-            justify-items: center;
-            cursor: pointer;
-            background-color: #F7F7F7;
-            border-radius: 32px;
-
-            &__detail {
-              display: grid;
-              padding: 8px 10px;
-
-              &.active{
-                background-color: #d3d3d3;
-                border-radius: 30px;
-              }
-
-              &:hover {
-                border-radius: 30px;
-                background-color: #EBEBEB;
-                padding: 8px 10px;
-
-              }
-
-              &__title {
-                display: grid;
-                align-items: end;
-                justify-items: start;
-
-                h3 {
-                  font-family: "Roboto", sans-serif;
-                  font-size: 12px;
-                  line-height: 16px;
-                  font-weight: 800;
-                  letter-spacing: 0.04em;
-                }
-
-              }
-
-              &__name {
-                display: grid;
-                align-self: center;
-                justify-items: start;
-
-                p {
-                  font-family: inherit;
-                  font-size: 14px;
-                  line-height: 18px;
-                  font-weight: 600;
-                  color: gray;
-                }
-
-
-              }
-            }
-
-
-
-            &__buttonWrapper {
-              display: grid;
-              padding: 10px;
-
-              &:hover {
-
-                padding: 10px;
-                border-radius: 30px;
-                background-color: #EBEBEB;
-              }
-
-            }
-
-
-          }
-
-          &__technicalTaskContainer {
-            position: absolute;
-            z-index: 22;
-
-            &__content {
-              display: grid;
-              padding: 0 15px;
-              background-color: white;
-              border-radius: 10px;
-              grid-template-rows: auto auto;
-
-              &__text {
-                display: grid;
-                align-items: start;
-                grid-template-rows: 30px auto;
-                row-gap: 8px;
-
-                h3 {
-
-                }
-
-                &__textarea {
-                  margin-top: 8px;
-                  border-radius: 10px;
-                  width: 800px;
-                  min-height: 100px;
-                  padding: 10px;
-                  resize: none;
-                  outline: none;
-                }
-
-
-              }
-
-              &__teeths {
-                display: grid;
-
-                &__list {
-                  display: grid;
-                  grid-template-columns: repeat(16, 50px);
-                  grid-template-rows: repeat(2, auto);
-                  padding: 8px 16px;
-
-                  &__item {
-                    display: grid;
-                    grid-template-rows: 32px 40px 25px;
-                    align-items: start;
-                    justify-items: center;
-                    row-gap: 8px;
-
-
-                    &__checkbox {
-
-                    }
-
-                    &__tooth {
-                      position: relative;
-                      height: 100%;
-                      width: 100%;
-
-                      img {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        object-fit: contain;
-                      }
-
-                    }
-
-                    &__number {
-
-                    }
-                  }
-                }
-
-              }
-
-
-            }
-
-          }
-
-          &__carcass{
-          position: absolute;
-            width: 100%;
-            z-index: 22;
-
-           &__tabs{
-             display: grid;
-             grid-template-rows: 40px 1fr;
-             row-gap: 15px;
-             background-color: white;
-             border-radius: 25px;
-             padding: 10px;
-
-
-             &__list{
-               display: grid;
-               grid-template-columns: repeat(5,max-content);
-               column-gap: 5px;
-
-               &__item{
-                 display: grid;
-                 align-content: center;
-                 justify-items: center;
-                 padding: 0 10px;
-                 cursor: pointer;
-
-
-                 &.active{
-                   border-radius: 35px;
-                   background-color: lightgrey;
-                 }
-
-
-                 &__hover{
-                   background-color: #EBEBEB;
-                 }
-               }
-             }
-
-             &__tab{
-               display: grid;
-               padding: 15px;
-               height: 320px;
-               &__list{
-                 display: grid;
-                 grid-template-rows: repeat(auto-fit,50px);
-                 row-gap: 8px;
-                 overflow-y:scroll;
-
-
-                 &__item{
-                   display: grid;
-                   grid-template-columns: 40px auto;
-                   column-gap: 8px;
-                 }
-               }
-
-               &__select{
-                 display: grid;
-                 grid-template-rows: repeat(4,60px);
-                 row-gap: 8px;
-
-                 &__item{
-
-                 }
-               }
-
-               &__design{
-                 display: grid;
-                 grid-template-columns: auto 1fr;
-                 background-color: white;
-                 z-index: 22;
-                 height: 400px;
-                 width: 100%;
-                 border-radius: 25px;
-
-
-                 &__list{
-                   display: grid;
-                   grid-template-rows: repeat(auto-fit,60px);
-                   row-gap: 20px;
-                  padding: 15px;
-
-                   &__item{
-
-                     img{
-                       width: 80%;
-                       height: 80%;
-                       top:5px;
-                       //left: 15px;
-                       object-fit: contain;
-
-                     }
-                   }
-                 }
-
-                 &__colorTeeth{
-                   display: grid;
-                   height: 100%;
-                   grid-template-rows: 80px 1fr;
-                   row-gap: 10px;
-
-                   &__input{
-                     display: grid;
-                     align-items: center;
-                     justify-items: center;
-
-                     input{
-                       outline: none;
-                       border-radius: 15px;
-                       width: 360px;
-                       height: 60px;
-                       padding-left: 15px;
-                       font-size: 24px;
-                       border: 1px solid black;
-                     }
-                   }
-
-                   &__teeth{
-                     position: relative;
-                     display: grid;
-                     justify-self: center;
-                     height: 70%;
-                     width: 70%;
-
-                     img{
-                       position: absolute;
-                       width: 100%;
-                       height: 100%;
-                       top:0;
-                       left: 0;
-                       object-fit: cover;
-                     }
-                   }
-                 }
-
-               }
-
-
-               &__datePacket{
-                 position: absolute;
-                 right: 0;
-                 background-color: white;
-                 z-index: 22;
-                 border-radius: 25px;
-                 padding: 15px;
-
-               }
-             }
-
-           }
-
-          }
-
-
-        }
 
 
         &__dropzone {
           display: grid;
-          margin-top: 40px;
+
 
           &__area {
-            width: 80%;
-            height: 300px;
+            margin-top: 20px;
+            width: 100%;
+            height: 400px;
             border: 5px dashed white;
             display: grid;
             align-items: center;
@@ -480,21 +159,73 @@
           }
 
           &__move {
-            width: 90%;
-            height: 300px;
+            margin-top: 20px;
+            width: 100%;
+            height: 400px;
             display: grid;
-            align-content: center;
             font-size: 24px;
             color: white;
-            justify-items: center;
 
-            p {
+
+            &__preview{
+              display: grid;
+              grid-template-columns: repeat(auto-fill,120px);
+              gap:10px;
+
+              &__item{
+                display: grid;
+                align-items: center;
+                justify-items: center;
+                width: 120px;
+                height: 120px;
+                border-radius: 10px;
+                background-color: white;
+
+                &__image{
+                  position: relative;
+                  width: 100px;
+                  height: 100px;
+                  cursor: pointer;
+                  img{
+                    position: absolute;
+                    left: 0;
+                    top:0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+
+                  }
+
+                  &__icon{
+                    position: absolute;
+
+                    right: 5px;
+                    bottom: 5px;
+                    color: #ff5659;
+                    background-color: white;
+                    border: 1px solid #ff5659;
+                    padding: 2px;
+                    border-radius: 6px;
+
+                  }
+                }
+              }
+            }
+
+            &__title {
+              display: grid;
+              width: 100%;
+              height: 100%;
+              justify-items: center;
+              align-items: center;
               background-color: gray;
               padding: 5px;
               border-radius: 10px;
               opacity: 0.7;
             }
           }
+
+
         }
 
 

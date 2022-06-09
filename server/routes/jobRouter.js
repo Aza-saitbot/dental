@@ -1,9 +1,9 @@
 const Router=require('express')
 const router=new Router()
-const deviceController=require('../controllers/jobController')
+const jobController=require('../controllers/jobController')
 
-router.post('/',deviceController.create)
-router.get('/',deviceController.getAll)
-router.get('/:id',deviceController.getOne)
+router.post('/',jobController.create)
+router.get('/',jobController.getAll)
+router.get('/:id',jobController.getOne)
 
 module.exports=router

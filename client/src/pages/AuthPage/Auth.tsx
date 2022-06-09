@@ -7,7 +7,7 @@ import {useStylesButton, useStylesInput} from "../../useStyles/useStyles";
 import { useAppSelector} from "../../store/store";
 import {fetchLogin, fetchRegister} from "../../api/api";
 import {NavLink, useHistory, useLocation} from "react-router-dom";
-import {LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE} from "../../utils/consts";
+import {LOGIN_ROUTE, REGISTRATION_ROUTE, MAIN_ROUTE} from "../../utils/consts";
 import {useDispatch} from "react-redux";
 
 
@@ -46,7 +46,7 @@ const history=useHistory()
 
 
   useEffect(()=>{
-     if (isAuth)history.push(SHOP_ROUTE)
+     if (isAuth)history.push(MAIN_ROUTE)
   },[isAuth])
 
     return (

@@ -9,6 +9,10 @@ import Carcass from "./Carcass/Carcass";
 import DesignTooth from "./DesignTooth/DesignTooth";
 import DataPackerDental from './DatePacker/DataPackerDental';
 import {SearchSchemaType} from "../../../types/RequestOptionsType";
+import {useDispatch} from "react-redux";
+import {createJobApi} from "../../../api/apiJob";
+import {DateRange} from "@mui/lab/DateRangePicker";
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 const tabsSearch = [
     {id: 1, title: 'Техническое задание', Component: TechnicalTask},
@@ -17,11 +21,31 @@ const tabsSearch = [
     {id: 4, title: 'Срок исполнения', Component: DataPackerDental},
 ]
 
+const defaultValues = {
+    abatment: '',
+    carcass: [],
+    colorRestorations: '',
+    colorTeeth: '',
+    datePicker: [],
+    designCarcass: '',
+    implants: '',
+    intermediatePart: 0,
+    rootTab: '',
+    shoulder: '',
+    teeth: [],
+    temporaryCrown: '',
+    tz: '',
+}
+
 const SearchBar = () => {
     const [drag, setDrag] = useState(false)
-    const [currentFiles, setCurrentFiles] = useState<any>()
+    const [currentFiles, setCurrentFiles] = useState<Array<File>>([])
     const [visible, setVisible] = useState(false)
-    const [selectTab, setSelectTab] = useState(0)
+    const [selectTab, setSelectTab] = useState<number>(0)
+    const [previewImages, setPreviewImages] = useState<any>([])
+    const dispatch = useDispatch()
+
+    console.log('previewImages', previewImages)
 
     const activeVisible = (tab: number) => {
         setVisible(prevState => {
@@ -35,11 +59,34 @@ const SearchBar = () => {
 
     const methods = useForm({
         mode: 'onSubmit',
-    });
+        defaultValues
+    })
 
 
     const onSubmit = (data: SearchSchemaType) => {
         console.log('data', data)
+        const formData = new FormData()
+
+        formData.append('tz', data.tz)
+        data?.abatment && formData.append('abatment', data.abatment)
+        formData.append('colorRestorations', data.colorRestorations)
+        formData.append('colorTeeth', data.colorTeeth)
+        data.designCarcass && formData.append('designCarcass', data.designCarcass)
+        data?.implants && formData.append('implants', data.implants)
+        data?.intermediatePart && formData.append('intermediatePart', `${data.intermediatePart}`)
+        data?.rootTab && formData.append('rootTab', data.rootTab)
+        data?.shoulder && formData.append('shoulder', data.shoulder)
+        data.temporaryCrown && formData.append('temporaryCrown', data.temporaryCrown)
+
+        formData.append('datePicker', JSON.stringify(data.datePicker))
+        formData.append('teeth', JSON.stringify(data.teeth))
+        formData.append('carcass', JSON.stringify(data.carcass))
+        currentFiles.forEach((item) => formData.append("files", item))
+
+        console.log(formData.getAll("files"))
+
+        dispatch(createJobApi(formData))
+
     }
 
     function dragStartHandler(e: React.DragEvent<HTMLDivElement>) {
@@ -52,72 +99,27 @@ const SearchBar = () => {
         setDrag(false)
     }
 
-    const styleFile={
-        opacity: 0,
-        Position: "absolute",
-        width: "100%",
-        height: "100%",
-        bottom: 25,
-        zIndex: 2
-    }
 
+    console.log('currentFiles', currentFiles)
 
     function onDropHandler(e: React.DragEvent<HTMLDivElement>) {
         e.preventDefault()
         // @ts-ignore
         let files = [...e.dataTransfer.files]
+
         setCurrentFiles(files)
-        const formData = new FormData()
-        formData?.forEach((item) => formData.append("files", item))
-        if (currentFiles?.length > 0) {
-            for (let i = 0; i < currentFiles?.length; i++) {
-                formData.append('files[]', currentFiles[i]);
-            }
-            console.log('files', formData.getAll('files[]'))
-        }
         setDrag(false)
     }
 
 
     return (
-        <div className="searchPage__content">
-            <div className="searchPage__content__item">
-                <img src={MainBackground} alt="background"/>
-                <div className="searchPage__content__item__search">
-                    <FormProvider {...methods}>
-                        <form onSubmit={methods.handleSubmit(onSubmit)}>
-                            <div className="searchPage__content__item__search__mainSearch">
-                                <div className="searchPage__content__item__search__mainSearch__item">
-                                    {tabsSearch.map(i =>
-                                        <div key={i.id}
-                                             className={selectTab === i.id
-                                                 ? "searchPage__content__item__search__mainSearch__item__detail active"
-                                                 : "searchPage__content__item__search__mainSearch__item__detail"}
-                                             onClick={() => activeVisible(i.id)}>
-                                            <div className="main__content__mainSearch__item__detail__title">
-                                                <h3>{i.title}</h3></div>
-                                        </div>
-                                    )}
-                                    <div className="searchPage__content__item__search__mainSearch__item__buttonWrapper">
-                                        <button
-                                            type="submit"
-                                            className={classes.root}>
-                                            <SearchIcon/>
-                                            Искать
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            {visible && tabsSearch.map(({Component, id}) => {
-                                    if (id === selectTab) {
-                                        return (
-                                                <Component key={id}
-                                                />
-                                        )
-                                    }
-                                    return null
-                                }
-                            )}
+        <FormProvider {...methods}>
+            <form onSubmit={methods.handleSubmit(onSubmit)}>
+                <div className="searchPage__content">
+                    <div className="searchPage__content__item">
+
+                        <div className="searchPage__content__item__search">
+
                             <div className="searchPage__content__item__search__dropzone">
                                 {drag
                                     ? <div
@@ -126,26 +128,50 @@ const SearchBar = () => {
                                         onDragOver={e => dragStartHandler(e)}
                                         onDrop={e => onDropHandler(e)}
                                         className="searchPage__content__item__search__dropzone__area"><p>Отпустите
-                                        файлы, что бы загруить их</p></div>
+                                        файлы, что бы загрузить их</p></div>
                                     : <div
                                         onDragStart={e => dragStartHandler(e)}
                                         onDragLeave={e => dragLeaveHandler(e)}
                                         onDragOver={e => dragStartHandler(e)}
                                         className="searchPage__content__item__search__dropzone__move">
-                                        <div style={{position: "relative"}}>
-                                            <input type="file"
-                                                   style={styleFile}/>
-                                            <p>Перетащите файлы, чтобы загрузить их</p></div>
+                                        <div>
+                                            <div className="searchPage__content__item__search__dropzone__move__preview">
+                                                {currentFiles.map((i, index) => {
+
+                                                    let imgUrl = URL.createObjectURL(i)
+
+                                                    return (
+                                                        <div key={index}
+                                                             className="searchPage__content__item__search__dropzone__move__preview__item">
+                                                            <div
+                                                                className="searchPage__content__item__search__dropzone__move__preview__item__image">
+                                                                <img src={imgUrl}/>
+                                                                <DeleteOutlineOutlinedIcon
+                                                                    onClick={() => setCurrentFiles(currentFiles.filter((m: File) => m !== i))}
+                                                                    fontSize={"small"}
+                                                                    className="searchPage__content__item__search__dropzone__move__preview__item__image__icon"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                })
+                                                }
+                                            </div>
+                                            {currentFiles.length === 0 &&
+                                                <div
+                                                    className="searchPage__content__item__search__dropzone__move__title"
+                                                >Перетащите файлы, чтобы загрузить их</div>
+                                            }
+                                        </div>
                                     </div>
                                 }
+
                             </div>
-
-                        </form>
-                    </FormProvider>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-        </div>
+            </form>
+        </FormProvider>
     );
 };
 

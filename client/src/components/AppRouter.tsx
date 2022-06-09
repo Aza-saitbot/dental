@@ -1,10 +1,10 @@
 import React from 'react';
+import '../App.scss'
 import {Redirect, Route, Switch} from "react-router-dom";
 import {authRoutes, publicRoutes} from "../routes";
-import {SHOP_ROUTE} from "../utils/consts";
+import {MAIN_ROUTE} from "../utils/consts";
 import {useAppSelector} from "../store/store";
-
-
+import Header from "./Header/Header";
 
 
 const AppRouter = () => {
@@ -17,16 +17,14 @@ const AppRouter = () => {
                <Route key={path} path={path} component={Component} exact/>
            )}
            {publicRoutes.map(({path,Component})=>
-               <Route key={path} path={path} component={Component} exact/>
+               <div className="app">
+                   <Header/>
+                   <Route key={path} path={path} component={Component} exact/>
+               </div>
            )}
-           <Redirect to={SHOP_ROUTE}/>
+           <Redirect to={MAIN_ROUTE}/>
        </Switch>
     );
 };
 
 export default AppRouter;
-
-// const token=useAppSelector((state)=>state.userReducer.token)
-// const Authenticated=!!token
-//
-// const routes = useRoutes(Authenticated)

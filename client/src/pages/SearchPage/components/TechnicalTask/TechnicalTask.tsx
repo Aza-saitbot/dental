@@ -11,15 +11,14 @@ const TechnicalTask = () => {
     return (
         <div className="searchPage__content__item__search__mainSearch__technicalTaskContainer">
             <div className="searchPage__content__item__search__mainSearch__technicalTaskContainer__content">
-                <div
-                    className="searchPage__content__item__search__mainSearch__technicalTaskContainer__content__text">
+                <div className="searchPage__content__item__search__mainSearch__technicalTaskContainer__content__text">
                     <h3>Техническое задание</h3>
-                    <TextareaAutosize defaultValue=''
+                    <TextareaAutosize
+                        defaultValue=''
                                       {...register('tz')}
                                       className="searchPage__content__item__search__mainSearch__technicalTaskContainer__content__text__textarea"/>
                 </div>
-                <div
-                    className="searchPage__content__item__search__mainSearch__technicalTaskContainer__content__teeths">
+                <div className="searchPage__content__item__search__mainSearch__technicalTaskContainer__content__teeths">
                     <div
                         className="searchPage__content__item__search__mainSearch__technicalTaskContainer__content__teeths__list">
                         {arrayTeeth.map((tooth) =>
@@ -56,7 +55,6 @@ const TechnicalTask = () => {
                         )}
                     </div>
                 </div>
-
             </div>
         </div>
     )

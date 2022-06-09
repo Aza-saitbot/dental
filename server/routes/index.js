@@ -1,13 +1,13 @@
 const Router=require('express')
 const router=new Router()
-const deviceRouter=require('./jobRouter')
+const jobRouter=require('./jobRouter')
 const userRouterRouter=require('./userRouter')
-const brandRouter=require('./brandRouter')
-const typeRouter=require('./typeRouter')
+// const brandRouter=require('./brandRouter')
+// const typeRouter=require('./typeRouter')
 
 router.use('/user',userRouterRouter)
-router.use('/type',typeRouter)
-router.use('/brand',brandRouter)
-router.use('/device',deviceRouter)
+// router.use('/type',typeRouter)
+// router.use('/brand',brandRouter)
+router.use('/job',jobRouter)
 
 module.exports=router
