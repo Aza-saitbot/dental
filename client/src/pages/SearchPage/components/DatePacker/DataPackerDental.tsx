@@ -5,9 +5,8 @@ import '../../SearchPage.scss'
 import {DatePickerAsController} from "../../../../utils/DatePickerAsController";
 import {useFormContext} from "react-hook-form";
 
-type DataPackerType={}
 
-const DataPackerDental:FC<DataPackerType> = () => {
+const DataPackerDental= () => {
       const [value, onChange] = React.useState<DateRange<Date>>([null, null]);
     const {control} = useFormContext();
 
@@ -15,7 +14,8 @@ const DataPackerDental:FC<DataPackerType> = () => {
 
     return (
         <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__datePacket">
-                {date}
+              //  {/*{date}*/}
+            Date
         </div>
     );
 };

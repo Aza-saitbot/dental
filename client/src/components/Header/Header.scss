@@ -20,6 +20,7 @@
 
     &__item {
       position: relative;
+      cursor: pointer;
 
       img {
         position: absolute;
@@ -435,8 +436,8 @@
     display: flex;
     flex-direction: column;
     row-gap: 15px;
-    width: max-content;
     padding: 0 20px;
+    position: relative;
 
     &__top {
       display: flex;
@@ -461,13 +462,14 @@
 
     &__list {
       display: grid;
-      grid-template-columns: 1fr 1.5fr 1fr;
+      grid-template-columns: 1fr 1.2fr 1fr;
       align-items: center;
+
 
       background-color: #F7F7F7;
       border: 1px solid #DDDDDD;
       border-radius: 32px;
-
+      position: relative;
 
       &__item {
         display: grid;
@@ -532,15 +534,32 @@
 
       }
 
+      &__tabs{
+        position: absolute;
+        background: white;
+        z-index: 33;
+        top:70px;
+        left: 0;
+        height: 500px;
+        padding: 10px;
+        width: 98%;
+        border-radius: 32px;
+        border: 1px solid #DDDDDD;
+
+
+      }
 
     }
+
+
 
 
   }
 
   &__menu {
     display: grid;
-
+    align-self: start;
+    margin-top: 20px;
     justify-items: end;
 
     &__item {

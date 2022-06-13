@@ -21,20 +21,20 @@ import {setIsRollUp} from "../../store/reducers/JobSlice";
 import {useOutsideClick} from "../../utils/hooks/useOutsideClick";
 
 const tabsSearch = [
-    {id: 1, title: 'Задание', Component: TechnicalTask},
-    {id: 2, title: 'Виды работы', Component: Carcass},
-    // {id: 3, title: 'Дизайн', Component: DesignTooth},
-    {id: 3, title: 'когда закончить?', Component: DataPackerDental},
+     {id: 0, title: 'Задание', Component: TechnicalTask},
+    {id: 1, title: 'Виды работы', Component: Carcass},
+    // {id: 2, title: 'Дизайн', Component: DesignTooth},
+    {id: 2, title: 'когда закончить?', Component: DataPackerDental},
 ]
 const rollupTop = [
     {id: 1, title: 'Стоматолги'},
     {id: 2, title: 'Зубные техники'},
 ]
 const rollupTabsSearch = [
-    {id: 1, title: 'Задание', question: 'Техническое задание', Component: TechnicalTask},
-    {id: 2, title: 'Каркас', question: 'Выбор материала', Component: Carcass},
-    //{id: 3, title: 'Дизайн',question:'Техническое задание', Component: DesignTooth},
-    {id: 3, title: 'Срок', question: 'когда завершить?', Component: DataPackerDental},
+    {id: 0, title: 'Задание', question: 'Техническое задание', Component:TechnicalTask},
+     {id: 1, title: 'Каркас', question: 'Выбор материала', Component:Carcass},
+    // {id: 2, title: 'Дизайн',question:'Техническое задание', Component: DesignTooth},
+    {id: 2, title: 'Срок', question: 'когда завершить?', Component: DataPackerDental},
 ]
 
 const defaultValues = {
@@ -57,12 +57,12 @@ const Header = () => {
     const history = useHistory()
     const dispatch = useDispatch()
     const refHeader = useRef<HTMLDivElement>(null)
+    const refTabs = useRef<HTMLDivElement>(null)
     const isRollUp = useAppSelector((state) => state.job.isRollUp)
     const [currentFiles, setCurrentFiles] = useState<Array<File>>([])
-    const [visible, setVisible] = useState(false)
-    const [selectTab, setSelectTab] = useState<number>(1)
+    const [visible, setVisible] = useState(true)
+    const [selectTab, setSelectTab] = useState<number>(0)
     const [selectTabTop, setSelectTabTop] = useState<number>(1)
-
 
 
     const activeVisible = (tab: number) => {
@@ -76,6 +76,7 @@ const Header = () => {
     }
 
     useOutsideClick(refHeader, () => dispatch(setIsRollUp(false)), refHeader);
+    useOutsideClick(refTabs, () => dispatch(setVisible(false)), refTabs);
 
 
     const classes = useStylesSearch()
@@ -110,11 +111,20 @@ const Header = () => {
         dispatch(createJobApi(formData))
 
     }
-    console.log('refHeader.current', refHeader.current)
+    
+    console.log('current',rollupTabsSearch[selectTab])
+
+    const activeSelectTab = (tabId:number) => {
+        setSelectTab(tabId)
+        setVisible(true)
+    }
+
+
+    const getSelectedTab=(Component:()=> JSX.Element)=> <Component/>
 
     return (
-        <div
-            className={`header ${isRollUp && 'isRollUp'} `}>
+        <div ref={refHeader}
+             className={`header ${isRollUp && 'isRollUp'} `}>
             <div className="header__logo">
                 <div onClick={() => history.push(MAIN_ROUTE)} className="header__logo__item">
                     <img src={LogoCompanyIcon} alt="logo"/>
@@ -125,21 +135,18 @@ const Header = () => {
                     <div className="header__rollup__top">{
                         rollupTop.map(({id, title}) =>
                             <div
-                                onClick={e=>{
-                                    e.preventDefault()
-                                    setSelectTabTop(id)
-                                }}
-
+                                onClick={() =>  setSelectTabTop(id)}
                                 className={`header__rollup__top__item ${selectTabTop === id && 'selected'}`}
                                 key={id}>{title}</div>
                         )
                     }</div>
                     <div className="header__rollup__list">
                         {rollupTabsSearch.map(i =>
-                            <div key={i.id} className={`header__rollup__list__item ${selectTab === i.id ?'selected':'' }
-                            ${3 === i.id ?'search':'' }
+                            <div key={i.id}
+                                 className={`header__rollup__list__item ${selectTab === i.id ? 'selected' : ''}
+                            ${3 === i.id ? 'search' : ''}
                             `}
-                            onClick={()=>setSelectTab(i.id)}
+                                 onClick={()=>activeSelectTab(i.id)}
                             >
                                 <div>
                                     <div className="header__rollup__list__item_title">
@@ -157,8 +164,48 @@ const Header = () => {
                             </div>
                         )}
 
+                        {visible &&
+                            <div ref={refTabs} className="header__rollup__list__tabs">
+                                {rollupTabsSearch[selectTab]
+                                    && getSelectedTab(rollupTabsSearch[selectTab]?.Component)}
+                            </div>
+                        }
 
-                        {methods.formState.isDirty &&
+                    </div>
+                </div>
+                : <div className="header__mainSearch">
+                    <div onClick={() => dispatch(setIsRollUp(true))}
+                         className="header__mainSearch__item">
+                        {tabsSearch.map(i =>
+                            <div key={i.id}
+                                 className={i.id === 1
+                                     ? "header__mainSearch__item__detail borderStyle"
+                                     : "header__mainSearch__item__detail"}>
+                                <div className="mainSearch__item__detail__title">
+                                    {i.title}</div>
+                            </div>
+                        )}
+                        <div className="header__mainSearch__item__buttonWrapper">
+                            <button
+                                className="header__mainSearch__item__buttonWrapper__search">
+                                <SearchIcon/>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+            <div className="header__menu">
+                <DropdownProfile/>
+            </div>
+        </div>
+    )
+};
+
+export default Header;
+
+{/*   {methods.formState.isDirty &&
                             <div
                                 className="header__rollup">
                                 <div
@@ -172,39 +219,4 @@ const Header = () => {
                                     />
                                 </div>
                             </div>
-                        }
-                    </div>
-                </div>
-                : <div className="header__mainSearch">
-                    <div ref={refHeader} onClick={()=>dispatch(setIsRollUp(true))}
-                         className="header__mainSearch__item">
-                        {tabsSearch.map(i =>
-                                <div key={i.id}
-                                     className={i.id === 2
-                                         ? "header__mainSearch__item__detail borderStyle"
-                                         : "header__mainSearch__item__detail"}>
-                                    <div className="mainSearch__item__detail__title">
-                                        {i.title}</div>
-                                </div>
-                        )}
-                        <div className="header__mainSearch__item__buttonWrapper">
-                            <button
-                                className="header__mainSearch__item__buttonWrapper__search">
-                                <SearchIcon/>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            }
-
-            {visible && tabsSearch.forEach(({Component, id}) =>
-                <Component key={id}/>
-            )}
-            <div className="header__menu">
-                <DropdownProfile/>
-            </div>
-        </div>
-    )
-};
-
-export default Header;
+                        }*/}

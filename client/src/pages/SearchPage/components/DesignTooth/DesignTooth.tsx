@@ -61,151 +61,153 @@ const DesignTooth = () => {
     const [colorRestorations,setColorRestorations]=useState<number>(0)
 
         return (
-            <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design">
-                <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__list">
-                    <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__list__item">
-                        <Controller
-                            name="intermediatePart"
-                            control={control}
-                            render={({field:{onChange}})=>
-                                <FormControl style={{width:'200px'}}>
-                                    <InputLabel id="intermediatePart-label">Дизайн промежуточной части</InputLabel>
-                                    <Select
-                                        labelId="intermediatePart-label"
-                                        label="Дизайн промежуточной части"
-                                        IconComponent={ShowIcon}
-                                        MenuProps={{ classes: { list: classes.list } }}
-                                        classes={{select:classes.select,root:classes.root}}
-                                        value={intermediatePart}
-                                        onChange={(e:SelectChangeEvent<number>)=> {
-                                            onChange(e)
-                                            setIntermediatePart(Number(e.target.value))
-                                        }}
-                                    >
-                                        {arrayIntermediatePart?.map(({id,img}) => (
-                                            <MenuItem key={id}
-                                                      value={id}>
-                                               <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__list__item__menu">
-                                                   <img src={img} alt="img"/>
-                                               </div>
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
-                            }
-                        />
-                    </div>
-                    <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__list__item">
-                        <Controller
-                            name="designCarcass"
-                            control={control}
-                            render={({field:{onChange}})=>
-                                <FormControl style={{width:'200px'}}>
-                                    <InputLabel id="carcass-label">Каркас</InputLabel>
-                                    <Select
-                                        labelId="carcass-label"
-                                        label="Каркас"
-                                        defaultValue={0}
-                                        IconComponent={ShowIcon}
-                                        MenuProps={{ classes: { list: classes.list } }}
-                                        classes={{select:classes.select,root:classes.root}}
-                                        value={designCarcass}
-                                        onChange={(e:SelectChangeEvent<number>)=>{
-                                            onChange(e)
-                                            setDesignCarcass(Number(e.target.value))
-                                        }}
-                                    >
-                                        {arrayDesignCarcass?.map(({id,img}) => (
-                                            <MenuItem key={id}
-
-                                                      value={id}>
-                                                <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__list__item__menu">
-                                                    <img src={img} alt="img"/>
-                                                </div>
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
-                            }
-                        />
-                    </div>
-                    <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__list__item">
-                        <Controller
-                            name="shoulder"
-                            control={control}
-                            render={({field:{onChange}})=>
-                                <FormControl style={{width:'200px'}}>
-                                    <InputLabel id="shoulder-label">Плечо</InputLabel>
-                                    <Select
-                                        labelId="shoulder-label"
-                                        label="Плечо"
-                                        IconComponent={ShowIcon}
-                                        MenuProps={{ classes: { list: classes.list } }}
-                                        classes={{select:classes.select,root:classes.root}}
-                                        value={shoulder}
-                                        onChange={(e:SelectChangeEvent<number>)=>{
-                                            onChange(e)
-                                            setShoulder(Number(e.target.value))
-                                        }}
-                                    >
-                                        {arrayShoulder?.map(({id,img}) => (
-                                            <MenuItem key={id}
-                                                      value={id}>
-                                                <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__list__item__menu">
-                                                    <img src={img} alt="img"/>
-                                                </div>
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
-                            }
-                        />
-                    </div>
-                    <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__list__item">
-                        <Controller
-                            name="colorRestorations"
-                            control={control}
-                            render={({field:{onChange}})=>
-                                <FormControl style={{width:'200px'}}>
-                                    <InputLabel id="colorRestorations-label">Окрасить реставрации</InputLabel>
-                                    <Select
-                                        labelId="colorRestorations-label"
-                                        label="Окрасить реставрации"
-                                        IconComponent={ShowIcon}
-                                        MenuProps={{ classes: { list: classes.list } }}
-                                        classes={{select:classes.select,root:classes.root}}
-                                        value={colorRestorations}
-                                        onChange={(e:SelectChangeEvent<number>)=> {
-                                            onChange(e)
-                                            setColorRestorations(Number(e.target.value))
-                                        }}
-                                    >
-                                        {arrayColorRestorations?.map(({id,value}) => (
-                                            <MenuItem key={id}
-                                                      value={id}>
-                                                <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__list__item__menu">
-                                                    <p>{value}</p>
-                                                </div>
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
-                            }
-                        />
-                    </div>
-                </div>
-                <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__colorTeeth">
-                    <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__colorTeeth__input">
-                        <input
-                            placeholder="Выбрать цвет"
-                            {...register('colorTeeth')} type="text"/>
-                    </div>
-                    <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__colorTeeth__teeth">
-                        <img src={ColorTeeth} alt="img"/>
-                    </div>
-                </div>
-            </div>
+            <div>Design</div>
         )
 };
 
 export default DesignTooth;
+
+// <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design">
+//     <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__list">
+//         <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__list__item">
+//             <Controller
+//                 name="intermediatePart"
+//                 control={control}
+//                 render={({field:{onChange}})=>
+//                     <FormControl style={{width:'200px'}}>
+//                         <InputLabel id="intermediatePart-label">Дизайн промежуточной части</InputLabel>
+//                         <Select
+//                             labelId="intermediatePart-label"
+//                             label="Дизайн промежуточной части"
+//                             IconComponent={ShowIcon}
+//                             MenuProps={{ classes: { list: classes.list } }}
+//                             classes={{select:classes.select,root:classes.root}}
+//                             value={intermediatePart}
+//                             onChange={(e:SelectChangeEvent<number>)=> {
+//                                 onChange(e)
+//                                 setIntermediatePart(Number(e.target.value))
+//                             }}
+//                         >
+//                             {arrayIntermediatePart?.map(({id,img}) => (
+//                                 <MenuItem key={id}
+//                                           value={id}>
+//                                     <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__list__item__menu">
+//                                         <img src={img} alt="img"/>
+//                                     </div>
+//                                 </MenuItem>
+//                             ))}
+//                         </Select>
+//                     </FormControl>
+//                 }
+//             />
+//         </div>
+//         <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__list__item">
+//             <Controller
+//                 name="designCarcass"
+//                 control={control}
+//                 render={({field:{onChange}})=>
+//                     <FormControl style={{width:'200px'}}>
+//                         <InputLabel id="carcass-label">Каркас</InputLabel>
+//                         <Select
+//                             labelId="carcass-label"
+//                             label="Каркас"
+//                             defaultValue={0}
+//                             IconComponent={ShowIcon}
+//                             MenuProps={{ classes: { list: classes.list } }}
+//                             classes={{select:classes.select,root:classes.root}}
+//                             value={designCarcass}
+//                             onChange={(e:SelectChangeEvent<number>)=>{
+//                                 onChange(e)
+//                                 setDesignCarcass(Number(e.target.value))
+//                             }}
+//                         >
+//                             {arrayDesignCarcass?.map(({id,img}) => (
+//                                 <MenuItem key={id}
+//
+//                                           value={id}>
+//                                     <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__list__item__menu">
+//                                         <img src={img} alt="img"/>
+//                                     </div>
+//                                 </MenuItem>
+//                             ))}
+//                         </Select>
+//                     </FormControl>
+//                 }
+//             />
+//         </div>
+//         <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__list__item">
+//             <Controller
+//                 name="shoulder"
+//                 control={control}
+//                 render={({field:{onChange}})=>
+//                     <FormControl style={{width:'200px'}}>
+//                         <InputLabel id="shoulder-label">Плечо</InputLabel>
+//                         <Select
+//                             labelId="shoulder-label"
+//                             label="Плечо"
+//                             IconComponent={ShowIcon}
+//                             MenuProps={{ classes: { list: classes.list } }}
+//                             classes={{select:classes.select,root:classes.root}}
+//                             value={shoulder}
+//                             onChange={(e:SelectChangeEvent<number>)=>{
+//                                 onChange(e)
+//                                 setShoulder(Number(e.target.value))
+//                             }}
+//                         >
+//                             {arrayShoulder?.map(({id,img}) => (
+//                                 <MenuItem key={id}
+//                                           value={id}>
+//                                     <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__list__item__menu">
+//                                         <img src={img} alt="img"/>
+//                                     </div>
+//                                 </MenuItem>
+//                             ))}
+//                         </Select>
+//                     </FormControl>
+//                 }
+//             />
+//         </div>
+//         <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__list__item">
+//             <Controller
+//                 name="colorRestorations"
+//                 control={control}
+//                 render={({field:{onChange}})=>
+//                     <FormControl style={{width:'200px'}}>
+//                         <InputLabel id="colorRestorations-label">Окрасить реставрации</InputLabel>
+//                         <Select
+//                             labelId="colorRestorations-label"
+//                             label="Окрасить реставрации"
+//                             IconComponent={ShowIcon}
+//                             MenuProps={{ classes: { list: classes.list } }}
+//                             classes={{select:classes.select,root:classes.root}}
+//                             value={colorRestorations}
+//                             onChange={(e:SelectChangeEvent<number>)=> {
+//                                 onChange(e)
+//                                 setColorRestorations(Number(e.target.value))
+//                             }}
+//                         >
+//                             {arrayColorRestorations?.map(({id,value}) => (
+//                                 <MenuItem key={id}
+//                                           value={id}>
+//                                     <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__list__item__menu">
+//                                         <p>{value}</p>
+//                                     </div>
+//                                 </MenuItem>
+//                             ))}
+//                         </Select>
+//                     </FormControl>
+//                 }
+//             />
+//         </div>
+//     </div>
+//     <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__colorTeeth">
+//         <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__colorTeeth__input">
+//             <input
+//                 placeholder="Выбрать цвет"
+//                 {...register('colorTeeth')} type="text"/>
+//         </div>
+//         <div className="searchPage__content__item__search__mainSearch__carcass__tabs__tab__design__colorTeeth__teeth">
+//             <img src={ColorTeeth} alt="img"/>
+//         </div>
+//     </div>
+// </div>
